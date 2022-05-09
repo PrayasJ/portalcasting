@@ -17,6 +17,7 @@ portalcast(
   controls_model = NULL,
   settings = directory_settings(),
   quiet = FALSE,
+  multi_process = FALSE,
   verbose = FALSE
 )
 
@@ -32,6 +33,7 @@ cast(
   controls_model = NULL,
   settings = directory_settings(),
   quiet = FALSE,
+  multi_process = multi_process,
   verbose = FALSE
 )
 }
