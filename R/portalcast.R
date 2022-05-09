@@ -65,6 +65,7 @@ portalcast <- function (main             = ".",
                         controls_model   = NULL, 
                         settings         = directory_settings(),
                         quiet            = FALSE,
+                        multi_process    = FALSE,
                         verbose          = FALSE){
 
   return_if_null(models)
@@ -79,8 +80,7 @@ portalcast <- function (main             = ".",
   end_moons       <- ifnull(end_moons, last_moon)
   nend_moons      <- length(end_moons)
 
-  for (i in 1:nend_moons) {
-
+  f <- function(i){
     cast(main             = main, 
          datasets         = datasets,
          models           = models, 
@@ -91,9 +91,16 @@ portalcast <- function (main             = ".",
          cast_date        = cast_date, 
          controls_model   = controls_model, 
          settings         = settings,
-         quiet            = quiet, 
+         quiet            = quiet,
+         multi_process    = multi_process, 
          verbose          = verbose)
-
+  }
+  
+  if(multi_process == FALSE){
+    lapply(1:nend_moons, f)
+  }
+  else{
+    mclapply(1:nend_moons, f)
   }
 
   if (end_moons[nend_moons] != last_moon) {
@@ -129,6 +136,7 @@ cast <- function (main             = ".",
                   controls_model   = NULL, 
                   settings         = directory_settings(), 
                   quiet            = FALSE, 
+                  multi_process    = multi_process,
                   verbose          = FALSE) {
 
   moons <- read_moons(main     = main,
@@ -159,9 +167,7 @@ cast <- function (main             = ".",
                                    settings = settings)
 
   nmodels <- length(models)
-
-  for (i in 1:nmodels) {
-
+  g <- function(i){
     model <- models_scripts[i]
 
     messageq(message_break(), "\n -Running ", path_no_ext(basename(model)), "\n", message_break(), quiet = quiet)
@@ -177,7 +183,13 @@ cast <- function (main             = ".",
       messageq("  |++++| ", path_no_ext(basename(model)), " successful |++++|", quiet = quiet)
 
     }
+  }
 
+  if(multi_process == FALSE){
+    lapply(1:nmodels, g)
+  }
+  else{
+    mclapply(1:nmodels, g)
   }
 
   clear_tmp(main     = main, 
