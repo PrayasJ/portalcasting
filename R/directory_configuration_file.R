@@ -7,6 +7,8 @@
 #'
 #' @param quiet \code{logical} indicator if progress messages should be quieted.
 #'
+#' @param verbose \code{logical} indicator of whether or not to print out all of the information (and thus just the tidy messages).
+#'
 #' @param main \code{character} value of the name of the main component of the directory tree. Default value (\code{"."}) puts the forecasting directory in the present locations. Nesting the forecasting directory in a folder can be done by simply adding to the \code{main} input (see \code{Examples}).
 #'
 #' @param settings \code{list} of controls for the directory, with defaults set in \code{\link{directory_settings}} that should generally not need to be altered.
@@ -32,7 +34,9 @@ write_directory_config <- function (main     = ".",
                               subs                  = settings$subs),
                  raw   = settings$raw)
 
-  write_yaml(config, file = file.path(main, settings$files$directory_config))
+  write_yaml(x    = config, 
+             file = file.path(main, settings$files$directory_config))
+
   invisible(config)
 
 }
@@ -68,7 +72,8 @@ read_directory_config <- function (main     = ".",
 #'
 update_directory_config <- function (main     = ".", 
                                      settings = directory_settings(), 
-                                     quiet    = FALSE){
+                                     quiet    = FALSE,
+                                     verbose  = FALSE){
   
   config <- read_directory_config(main     = main, 
                                   settings = settings,
@@ -84,15 +89,14 @@ update_directory_config <- function (main     = ".",
 
     config$raw$PortalData_version <- scan(file  = file.path(main, settings$subs$resources, "PortalData", "version.txt"),
                                           what  = "character", 
-                                          quiet = TRUE)
+                                          quiet = !verbose)
 
   }
 
+  write_yaml(x    = config, 
+             file = file.path(main, settings$files$directory_config))
 
-
-  yams <- as.yaml(config)
-  writeLines(yams, con = file.path(main, settings$files$directory_config))  
-  invisible()
+  invisible(config)
 
 }
 

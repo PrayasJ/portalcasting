@@ -4,17 +4,26 @@
 devtools::document()
 devtools::load_all()
 
-main <- "./testing"
+main <- "~/portalcasting"
 
-setup_dir(main)
-portalcast(main)
 
-# updating to working with the settings list
-# minimizing other changes to the degree possible
+setup_production(main = main)
 
-# all functions in production work as used!
+#
+# to do
+#
+#   in portalcast and cast
+#      datasets should come from the models' via their controls
+#
 
-####    updating tests ... should be good for a full run
+
+
+
+
+
+
+
+
 
 
 

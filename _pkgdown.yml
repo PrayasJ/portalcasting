@@ -64,6 +64,8 @@ reference:
     desc: "Functions for processing, evaluating, and combining casts"
     contents:
       - save_cast_output
+      - evaluate_cast
+      - evaluate_casts
       - ensemble_casts
       - measure_cast_level_error
       - add_lead_to_cast_tab
@@ -101,18 +103,19 @@ reference:
     desc: "Functions that facilitate use of the Portal rodents data"
     contents:
       - prep_rodents
-      - prep_rodent_dataset
-      - prefab_rodent_datasets
-      - prefab_rodent_dataset_controls
+      - prep_dataset
+      - prefab_datasets
+      - prefab_dataset_controls
+      - dataset_controls
+      - write_dataset_controls
+      - read_dataset_controls
       - rodent_species
-      - evalplot_species
       - all_species
       - base_species
       - is_sp_col
       - na_conformer
       - remove_incompletes
       - species_from_table
-      - most_abundant_species
   - title: "Lunar data functions"
     desc: "Functions for managing the lunar temporal data"
     contents:
@@ -126,6 +129,9 @@ reference:
       - model_template
       - prefab_models
       - prefab_model_controls
+      - model_controls
+      - write_model_controls
+      - read_model_controls
   - title: "Prefabricated models"
     desc: "Functions used to run the prefab models"
     contents:
@@ -153,7 +159,6 @@ reference:
       - list_depth
       - return_if_null
       - named_null_list
-      - clear_tmp
       - update_list
       - append_csv
       - combine_hist_and_cast
@@ -163,7 +168,6 @@ reference:
       - foy
       - add_date_from_components
       - path_no_ext
-      - files_control
   - title: "Download functions"
     desc: "Functions for creating API URLs, retrieving, and managing downloaded components"
     contents:

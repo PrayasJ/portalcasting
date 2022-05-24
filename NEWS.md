@@ -2,6 +2,73 @@
 
 Version numbers follow [Semantic Versioning](https://semver.org/).
 
+# [portalcasting 0.39.0](https://github.com/weecology/portalcasting/releases/tag/v0.39.0)
+*2022-05-11*
+
+### `download_timeout` now set to default of 600 for `setup_production`
+* Allows download of larger directory archive without timeout 
+
+
+# [portalcasting 0.38.0](https://github.com/weecology/portalcasting/releases/tag/v0.38.0)
+*2022-04-21*
+
+### If there's only one model, don't ensemble
+* Prevents warnings / errors 
+
+
+# [portalcasting 0.37.0](https://github.com/weecology/portalcasting/releases/tag/v0.37.0)
+*2022-04-21*
+
+### Building out evaluation pipeline
+* starting with what is already occurring, but formalizing as such as part of an `evaluate_casts` and `evaluate_cast` pair of functions
+* `evaluate_casts` function now works automatically to evaluate all the casts using `evaluate_cast`, generating the error table as it does when being used, but nothing is saved out or updated.
+* there is also no filter on evaluated casts by deafult, so the output from the forecasts without observations to evaluate is a table with a single row with NaN, and then they get wrapped up into the list. 
+  * no errors, just noteworthy
+
+# [portalcasting 0.36.0](https://github.com/weecology/portalcasting/releases/tag/v0.36.0)
+*2022-04-08*
+
+### `rodent_species`
+* Now includes `type` argument with `abbreviation`, `Latin`, and `table` options
+* No more `most_abundant_species` function, as we're not using it on the website.
+
+
+# [portalcasting 0.35.0](https://github.com/weecology/portalcasting/releases/tag/v0.35.0)
+*2022-04-07*
+
+### Updating model controls
+* `time`
+* `response` with `type` and `link` 
+
+### Developing evaluate functions
+* `evaluate_casts` and `evaluate_cast` currently just placeholders
+
+# [portalcasting 0.34.0](https://github.com/weecology/portalcasting/releases/tag/v0.34.0)
+*2022-04-07*
+
+### Removing `tmp` sub
+* No longer used, internal R code (e.g., `tempdir`) provides needed functionality
+* Also removing `clear_tmp`
+
+# [portalcasting 0.33.0](https://github.com/weecology/portalcasting/releases/tag/v0.33.0)
+*2022-04-07*
+
+### `setup_production` defaults to `verbose = TRUE`
+* Facilitates fuller log
+
+
+# [portalcasting 0.32.0](https://github.com/weecology/portalcasting/releases/tag/v0.32.0)
+*2022-04-05*
+
+
+### Relocation of prefab controls 
+* Moved from source code scripts to `.yaml` files in `inst/extdata`
+* `read_` and `write_` functions for both rodent and model controls lists
+
+
+### Updating / rectifying terminology
+* "data_set" -> "dataset"
+
 # [portalcasting 0.31.0](https://github.com/weecology/portalcasting/releases/tag/v0.31.0)
 *2022-04-01*
 

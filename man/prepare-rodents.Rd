@@ -7,7 +7,7 @@
 \usage{
 prep_rodents(
   main = ".",
-  datasets = prefab_rodent_datasets(),
+  datasets = prefab_datasets(),
   settings = directory_settings(),
   quiet = FALSE,
   verbose = FALSE
@@ -18,7 +18,7 @@ prep_rodents(
 
 \item{datasets}{\code{character} vector of name(s) of rodent dataset(s) to include.}
 
-\item{settings}{\code{list} of controls for the directory, with defaults set in \code{\link{directory_settings}} that should generally not need to be altered.}
+\item{settings}{\code{list} of controls for the directory, with defaults set in \code{\link{directory_settings}}.}
 
 \item{quiet}{\code{logical} indicator controlling if messages are printed.}
 

@@ -24,7 +24,7 @@
 #'
 #' @param include_interp \code{logical} indicator of if the models fit using interpolated data should be included with the models that did not.
 #'
-#' @param species \code{character} vector of the species code(s) or \code{"total"} for the total across species) to be plotted \code{NULL} translates to the species defined by \code{evalplot_species}.
+#' @param species \code{character} vector of the species code(s) or \code{"total"} for the total across species) to be plotted \code{NULL} translates to the species defined by \code{base_species}.
 #'
 #' @return \code{NULL}. Plot is generated.
 #' 
@@ -47,6 +47,12 @@ plot_casts_cov_RMSE <- function (main           = ".",
                                  dataset        = NULL, 
                                  include_interp = TRUE,
                                  species        = NULL) {
+
+  if (length(models) == 1 && models != "ensemble") {
+
+    ensemble <- FALSE
+
+  }
 
   if (is.null(cast_tab)) {
 
@@ -84,18 +90,22 @@ plot_casts_cov_RMSE <- function (main           = ".",
 
   }
 
-  cast_tab$data_set <- gsub("_interp", "", cast_tab$data_set)
-  cast_ids          <- ifnull(cast_ids, unique(cast_tab$cast_id))
-  models            <- ifnull(models, unique(cast_tab$model))
-  dataset          <- ifnull(dataset, unique(cast_tab$data_set)[1])
-  species           <- ifnull(species, evalplot_species()) 
-  end_moons         <- ifnull(end_moons, unique(cast_tab$end_moon)) 
-  cast_id_in        <- cast_tab$cast_id %in% cast_ids
-  model_in          <- cast_tab$model %in% models
-  dataset_in       <- cast_tab$data_set == dataset
-  species_in        <- cast_tab$species %in% species
-  end_moon_in       <- cast_tab$end_moon %in% end_moons
-  all_in            <- cast_id_in & model_in & dataset_in & species_in & end_moon_in
+  # patch
+  colnames(cast_tab)[colnames(cast_tab) %in% c("data_set", "dataset")] <- "dataset"
+  # patch
+
+  cast_tab$dataset <- gsub("_interp", "", cast_tab$dataset)
+  cast_ids                <- ifnull(cast_ids, unique(cast_tab$cast_id))
+  models                  <- ifnull(models, unique(cast_tab$model))
+  dataset          <- ifnull(dataset, unique(cast_tab$dataset)[1])
+  species                 <- ifnull(species, eval_species()) 
+  end_moons               <- ifnull(end_moons, unique(cast_tab$end_moon)) 
+  cast_id_in              <- cast_tab$cast_id %in% cast_ids
+  model_in                <- cast_tab$model %in% models
+  dataset_in       <- cast_tab$dataset == dataset
+  species_in              <- cast_tab$species %in% species
+  end_moon_in             <- cast_tab$end_moon %in% end_moons
+  all_in                  <- cast_id_in & model_in & dataset_in & species_in & end_moon_in
 
   if (sum(all_in) == 0) {
 
@@ -122,14 +132,10 @@ plot_casts_cov_RMSE <- function (main           = ".",
                                         cast_tab = cast_tab,
                                         end_moon = end_moons[i],
                                         models   = models, 
-                                        dataset = dataset,
+                                        dataset  = dataset,
                                         species  = species))
 
     }
-
-    # patch
-    colnames(ecast_tab)[colnames(ecast_tab) == "dataset"] <- "data_set"
-    # patch
 
     ecast_tab <- ecast_tab[ , -which(colnames(ecast_tab) == "var")]
     models    <- c(models, as.character(unique(ecast_tab$model)))
@@ -270,7 +276,7 @@ plot_casts_cov_RMSE <- function (main           = ".",
 #'
 #' @param include_interp \code{logical} indicator of if the models fit using interpolated data should be included with the models that did not.
 #'
-#' @param species \code{character} vector of the species code(s) or \code{"total"} for the total across species) to be plotted \code{NULL} translates to the species defined by \code{evalplot_species}.
+#' @param species \code{character} vector of the species code(s) or \code{"total"} for the total across species) to be plotted \code{NULL} translates to the species defined by \code{base_species}.
 #'
 #' @param settings \code{list} of controls for the directory, with defaults set in \code{\link{directory_settings}} that should generally not need to be altered.
 #'
@@ -295,6 +301,12 @@ plot_casts_err_lead <- function (main           = ".",
                                  dataset        = "controls", 
                                  include_interp = TRUE,
                                  species        = NULL) {
+
+  if (length(models) == 1 && models != "ensemble") {
+
+    ensemble <- FALSE
+
+  }
 
   if (is.null(cast_tab)) {
 
@@ -332,19 +344,22 @@ plot_casts_err_lead <- function (main           = ".",
 
   }
 
+  # patch
+  colnames(cast_tab)[colnames(cast_tab) %in% c("data_set", "dataset")] <- "dataset"
+  # patch
 
-  cast_tab$data_set <- gsub("_interp", "", cast_tab$data_set)
-  cast_ids          <- ifnull(cast_ids, unique(cast_tab$cast_id))
-  models            <- ifnull(models, unique(cast_tab$model))
-  dataset          <- ifnull(dataset, unique(cast_tab$data_set)[1])
-  species           <- ifnull(species, evalplot_species()) 
-  end_moons         <- ifnull(end_moons, unique(cast_tab$end_moon)) 
-  cast_id_in        <- cast_tab$cast_id %in% cast_ids
-  model_in          <- cast_tab$model %in% models
-  dataset_in       <- cast_tab$data_set == dataset
-  species_in        <- cast_tab$species %in% species
-  end_moon_in       <- cast_tab$end_moon %in% end_moons
-  all_in            <- cast_id_in & model_in & dataset_in & species_in & end_moon_in
+  cast_tab$dataset <- gsub("_interp", "", cast_tab$dataset)
+  cast_ids                <- ifnull(cast_ids, unique(cast_tab$cast_id))
+  models                  <- ifnull(models, unique(cast_tab$model))
+  dataset          <- ifnull(dataset, unique(cast_tab$dataset)[1])
+  species                 <- ifnull(species, eval_species()) 
+  end_moons               <- ifnull(end_moons, unique(cast_tab$end_moon)) 
+  cast_id_in              <- cast_tab$cast_id %in% cast_ids
+  model_in                <- cast_tab$model %in% models
+  dataset_in       <- cast_tab$dataset == dataset
+  species_in              <- cast_tab$species %in% species
+  end_moon_in             <- cast_tab$end_moon %in% end_moons
+  all_in                  <- cast_id_in & model_in & dataset_in & species_in & end_moon_in
 
   if (sum(all_in) == 0) {
 
@@ -372,14 +387,12 @@ plot_casts_err_lead <- function (main           = ".",
                                         cast_tab = cast_tab,
                                         end_moon = end_moons[i],
                                         models   = models, 
-                                        dataset = dataset,
+                                        dataset  = dataset,
                                         species  = species))
 
     }
 
-    # patch
-    colnames(ecast_tab)[colnames(ecast_tab) == "dataset"] <- "data_set"
-    # patch
+
 
     ecast_tab <- ecast_tab[ , -which(colnames(ecast_tab) == "var")]
     models    <- c(models, as.character(unique(ecast_tab$model)))
@@ -391,7 +404,7 @@ plot_casts_err_lead <- function (main           = ".",
   nmodels <- length(models) 
   nspecies <- length(species)
 
-  if(nmodels == 1 & nspecies == 1){
+  if (nmodels == 1 & nspecies == 1) {
 
     yy <- round(cast_tab$error, 3)
     yrange <- range(c(0, yy), na.rm = TRUE)
@@ -493,10 +506,10 @@ plot_casts_err_lead <- function (main           = ".",
 
         }
 
-        dataset_in  <- cast_tab$data_set == dataset
-        model_in    <- cast_tab$model %in% models[i]
-        species_in  <- cast_tab$species %in% species[j]
-        end_moon_in <- cast_tab$end_moon %in% end_moons
+        dataset_in <- cast_tab$dataset == dataset
+        model_in          <- cast_tab$model %in% models[i]
+        species_in        <- cast_tab$species %in% species[j]
+        end_moon_in       <- cast_tab$end_moon %in% end_moons
 
         all_in <- cast_id_in & model_in & dataset_in & species_in & end_moon_in
 
@@ -748,9 +761,9 @@ plot_cast_point <- function (main         = ".",
   max_obs <- 0
   if (with_census) {
 
-    obs           <- read_rodents_table(main     = main, 
-                                        settings = settings,
-                                        dataset  = casts_meta$data_set)
+    obs           <- read_rodents_table(main           = main, 
+                                        settings       = settings,
+                                        dataset = casts_meta$dataset)
     colnames(obs) <- gsub("\\.", "", colnames(obs))
     sp_col        <- is_sp_col(obs, nadot = TRUE, total = TRUE)
     species       <- ifnull(species, colnames(obs)[sp_col])
@@ -767,7 +780,7 @@ plot_cast_point <- function (main         = ".",
 
   }
 
-  dataset <- casts_meta$data_set
+  dataset <- casts_meta$dataset
 
   if (!is.null(model) && tolower(model) == "ensemble") {
 
@@ -795,12 +808,12 @@ plot_cast_point <- function (main         = ".",
   match_col  <- (colnames(preds) %in% colnames)
   preds      <- preds[match_sp & match_moon, match_col]
 
-  moon_month   <- as.numeric(format(as.Date(moons$newmoondate[moons$newmoonnumber == moon]), "%m"))
-  moon_year    <- as.numeric(format(as.Date(moons$newmoondate[moons$newmoonnumber == moon]), "%Y"))
-  title_date   <- paste(month.abb[moon_month], moon_year, sep = " ")
+  moon_month          <- as.numeric(format(as.Date(moons$newmoondate[moons$newmoonnumber == moon]), "%m"))
+  moon_year           <- as.numeric(format(as.Date(moons$newmoondate[moons$newmoonnumber == moon]), "%Y"))
+  title_date          <- paste(month.abb[moon_month], moon_year, sep = " ")
   dataset_name <- gsub("_interp", " (interpolated)", dataset)
-  model_name   <- ifnull(model, casts_meta$model)
-  title        <- paste0(title_date, ", " , model_name, ", ", dataset_name)
+  model_name          <- ifnull(model, casts_meta$model)
+  title               <- paste0(title_date, ", " , model_name, ", ", dataset_name)
 
   preds   <- preds[order(preds$estimate, decreasing = TRUE), ]
   species <- preds$species
@@ -937,7 +950,7 @@ plot_cast_ts <- function (main        = ".",
                           end_moon    = NULL, 
                           species     = "total", 
                           start_moon  = 217, 
-                          quiet       = FALSE){
+                          quiet       = FALSE) {
 
   model  <- ifnull(model, "Ensemble")
   model2 <- model
@@ -971,7 +984,7 @@ plot_cast_ts <- function (main        = ".",
 
   obs           <- read_rodents_table(main     = main, 
                                       settings = settings, 
-                                      dataset  = casts_meta$data_set)
+                                      dataset  = casts_meta$dataset)
   colnames(obs) <- gsub("\\.", "", colnames(obs))
 
   sp_col  <- is_sp_col(obs, nadot = TRUE, total = TRUE)
@@ -984,7 +997,7 @@ plot_cast_ts <- function (main        = ".",
   }
 
   obs     <- obs[ , c("newmoonnumber", species)]
-  dataset <- casts_meta$data_set
+  dataset <- casts_meta$dataset
 
   if (!is.null(model) && tolower(model) == "ensemble") {
 
@@ -1115,6 +1128,8 @@ plot_cast_ts <- function (main        = ".",
 
   points(o_x_1, o_y_1, type = "l", lwd = 2)
   points(o_x_2, o_y_2, type = "l", lwd = 2)
+
+  # pull the nice model name from the model controls yaml file based on settings list
 
   model_name   <- ifnull(model, casts_meta$model)
   dataset_name <- gsub("_interp", " (interpolated)", dataset)
