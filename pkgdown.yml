@@ -1,12 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2.9000
-pkgdown_sha: 98d5a5c735eb244cb98b2e6bab1d54bb27c0af95
+pkgdown: 2.0.6.9000
+pkgdown_sha: 956f076f661eb2de9413f64ea24a580cf444466d
 articles:
   codebase: codebase.html
   current_models: current_models.html
   getting_started: getting_started.html
   jags_models: jags_models.html
-last_built: 2022-04-02T04:22Z
+last_built: 2022-08-24T15:54Z
 urls:
   reference: https://weecology.github.io/portalcasting/reference
   article: https://weecology.github.io/portalcasting/articles

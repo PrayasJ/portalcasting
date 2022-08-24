@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">portalcasting</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.43.0</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
     </li>
   </ul></li>
 <li>
-  <a href="../reference/index.html">Functions</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -78,37 +78,52 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_data</span><span class="op">(</span>
-  dfl <span class="op">=</span> <span class="cn">NULL</span>,
-  main <span class="op">=</span> <span class="st">"."</span>,
-  data_sub <span class="op">=</span> <span class="st">"data"</span>,
-  save <span class="op">=</span> <span class="cn">TRUE</span>,
-  filename <span class="op">=</span> <span class="cn">NULL</span>,
-  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,
-  quiet <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_data</span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  data_sub <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  save <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>dfl</dt>
+    <dl><dt>x</dt>
 <dd><p><code>data.frame</code> or YAML <code>list</code> to be written out.</p></dd>
+
+
 <dt>main</dt>
 <dd><p><code>character</code> value of the name of the main component of the directory tree.</p></dd>
+
+
 <dt>data_sub</dt>
 <dd><p><code>character</code> value defining the data subdirectory of the portalcasting directory tree.</p></dd>
+
+
 <dt>save</dt>
 <dd><p><code>logical</code> indicator controlling if <code>x</code> should be saved out.</p></dd>
+
+
 <dt>filename</dt>
 <dd><p><code>character</code> name of the file for saving <code>x</code>.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p><code>logical</code> indicator of if the file should be overwritten if it exists.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p><code>logical</code> indicator if messages should be quieted.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>dfl</code> as input, <code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></code>-ly.</p>
+    
+
+<p><code>x</code> as input, <code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></code>-ly.</p>
     </div>
 
   </div>
@@ -123,7 +138,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
